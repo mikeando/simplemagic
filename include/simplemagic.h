@@ -8,11 +8,11 @@
 #define SMC_MAGIC(T,V) static const uint64_t smc__magic_##T = V
 #define smc_check_type(type,data) do { \
 	type* vv = data; \
-	smc__check_struct_type(#type, #data, smc__magic##type, (vv==NULL)?0:((type*)(data))->smc_magic, vv, __LINE__,__FILE__); \
+	smc__check_type(#type, #data, smc__magic_##type, (vv==NULL)?0:((type*)(data))->smc__magic, vv, __LINE__,__FILE__); \
 	} while(0)
-void smc__check_struct_type( const char * type, const char* expr, uint64_t expected_magic, uint64_t magic, void * p, int line, const char * file);
+void smc__check_type( const char * type, const char* expr, uint64_t expected_magic, uint64_t magic, void * p, int line, const char * file);
 #define smc_init_magic(type,data) do { \
-	data->smc__magic = smc__magic_##type ; \
+	(data)->smc__magic = smc__magic_##type ; \
 	} while(0)
 #else
 #define SMC_MAGIC(T,V)

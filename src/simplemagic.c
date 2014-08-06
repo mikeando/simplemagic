@@ -18,7 +18,7 @@ static char * hexify_uint64(uint64_t value, char* buffer) {
 	return buffer;
 }
 
-void smc__check_struct_type_f( const char * type, const char* expr, uint64_t expected_magic, uint64_t magic, void * v, int line, const char * file) {
+void smc__check_type( const char * type, const char* expr, uint64_t expected_magic, uint64_t magic, void * v, int line, const char * file) {
 	if(v==NULL) {
 		fprintf(stderr,"%s:%d %s isn't of type %s as it is NULL\n", file, line, expr, type);
 		assert(0);
